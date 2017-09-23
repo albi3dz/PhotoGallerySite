@@ -1,0 +1,28 @@
+﻿@model PhotoGallerySite.Models.AlbumShow
+
+<div id="comments">
+    <script type="text/javascript">
+        function clean() { $("textarea").val(''); }
+    </script>
+    <h2> Comments</h2>
+    @foreach (var com in Model.Comments)
+    {
+        <div class="comment-node">
+            <h4>@com.UserName</h4>
+            <h4>@com.DateCreated.ToString()</h4>
+            <p>@com.Content</p>
+        </div>
+    }
+    @if (User.Identity.IsAuthenticated)
+    {
+        using (Ajax.BeginForm("AddComment", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "comments", InsertionMode = InsertionMode.Replace, OnSuccess = "clean" }))
+        {
+            @Html.AntiForgeryToken()
+            <fieldset>
+                @Html.TextArea("Content", new { rows = "10", cols = "50" })
+                @Html.HiddenFor(model => model.AlbumId, new { Name = "Id" })
+                <input type="submit" id="send" value="Send" class="action-button" />
+            </fieldset>
+        }
+    }
+</div>

@@ -1,0 +1,15 @@
+﻿<table class="preview-table">
+    <tbody>
+        <tr>
+            <td><a id="left-btn" class="ajax-btn">&lt;</a></td>
+            <td>
+                <div id="preview-box">
+                    <img class="preview-image" src="@Url.Action( "show", "image", new { id = @Model.Pictures[0].PictureId })" id=@Model.Pictures[0].PictureId alt="@Model.Pictures[0].PictureTitle">
+                    <img class="preview-image" src="@Url.Action( "show", "image", new { id = @Model.Pictures[1].PictureId })" id=@Model.Pictures[1].PictureId alt="@Model.Pictures[1].PictureTitle">
+                    <img class="preview-image" src="@Url.Action( "show", "image", new { id = @Model.Pictures[2].PictureId })" id=@Model.Pictures[2].PictureId alt="@Model.Pictures[2].PictureTitle">
+                </div>
+            </td>
+            <td><a id="right-btn" class="ajax-btn">&gt</a></td>
+        </tr>
+    </tbody>
+</table>

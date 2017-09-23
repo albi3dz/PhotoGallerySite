@@ -1,0 +1,19 @@
+﻿<div class="home-box" style="min-height: 500px">
+    <h2 class="section-header">Search</h2>
+    @using (Ajax.BeginForm("Index", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "search-results", InsertionMode = InsertionMode.Replace }))
+    {
+        <fieldset>
+            <input type="search" name="pattern" />
+            <input type="submit" id="search" value="Search" class="action-button" />
+            <span id="search-type">
+                <p id="search-by">Search By:<p>
+                    <label for="choice1">User Name</label>
+                    <input type="radio" id="choice1" name="condition" value="user" />
+                    <label for="choice2">Album Title</label>
+                    <input type="radio" id="choice2" name="condition" value="album" checked />
+            </span>
+        </fieldset>
+    }
+    <div id="search-results">
+    </div>
+</div>

@@ -1,0 +1,30 @@
+﻿@model PhotoGallerySite.Models.AlbumShow
+
+@section scripts{
+
+    @Scripts.Render("~/bundles/show")
+
+}
+
+<div class="home-box">
+    <h2 class="section-header">@Model.AlbumTitle</h2>
+    <table class="show-table">
+        <caption>@Model.Pictures[0].PictureTitle</caption>
+        <tbody>
+            <tr>
+                <td>
+                    <img id="prev-btn" class="ajax-btn" src="~/Images/prev.png">
+                </td>
+                <td>
+                    <img id="current-image" src="@Url.Action( "show", "image", new { id = Model.Pictures[0].PictureId })" />
+                </td>
+                <td>
+                    <img id="next-btn" class="ajax-btn" src="~/Images/next.png">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    @Html.Partial("_ImagePreview", Model)
+    @Html.Partial("_Comments", Model)
+</div>
+

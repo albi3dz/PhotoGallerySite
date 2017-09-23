@@ -1,0 +1,33 @@
+﻿@model IEnumerable<PhotoGallerySite.Models.Album>
+
+@section scripts{
+
+    @Scripts.Render("~/bundles/myalbums")
+
+}
+<div class="home-box">
+    <h2 class="section-header"> MyAlbums</h2>
+    <table class="albums-table">
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Picture Count</th>
+            <th>Public?</th>
+        </tr>
+        @foreach (var album in Model)
+        {
+            <tr>
+                <td>@album.AlbumTitle</td>
+                <td>@album.Description </td>
+                <td>@album.Pictures.Count</td>
+                <td>@(album.Public ? "Yes" : "No")</td>
+                <td class="clean">@Html.ActionLink("Delete", "LOL", null, htmlAttributes: new { @class = "action-button delete", Id = album.AlbumId })</td>
+                <td class="clean">@Html.ActionLink("Edit", "Edit", new { Id = album.AlbumId }, htmlAttributes: new { @class = "action-button" })</td>
+                <td class="clean">@Html.ActionLink("Show", "Index", "Albums", new { Id = album.AlbumId }, htmlAttributes: new { @class = "action-button" })</td>
+            </tr>
+        }
+    </table>
+    @Html.ActionLink("Add Album", "AddAlbum", null, htmlAttributes: new { @class = "action-button add-button" })
+</div>
+
+@{Html.RenderPartial("_Modal");}

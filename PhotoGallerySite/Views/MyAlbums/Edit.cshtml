@@ -1,0 +1,60 @@
+﻿@model PhotoGallerySite.Models.Album
+
+@section scripts{
+
+    @Scripts.Render("~/bundles/edit")
+
+}
+
+<div class="home-box">
+    <h2 class="section-header">Edit</h2>
+    <div class="error"></div>
+    @using (Html.BeginForm("Edit", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <fieldset>
+            @Html.HiddenFor(model => model.AlbumId)
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Public)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Public)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.AlbumTitle)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.AlbumTitle)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Description)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Description)
+            </div>
+
+            <h3> Images</h3>
+            <table id="edit-table">
+                <tr>
+                    <th>Title</th>
+                    <th>Content</th>
+                </tr>
+                @{int i = 0;}
+                @foreach (var pic in Model.Pictures)
+                {
+                    <tr>
+                        <td>@Html.EditorFor(model => pic.PictureTitle, null, $"Pictures[{i}].PictureTitle")</td>
+                        <td class="padding-clean"><img src='@Url.Action( "show", "image", new { id = pic.PictureId })' /></td>
+                        <td class="clean">@Html.ActionLink("Delete", "LOL", null, htmlAttributes: new { @class = "action-button delete", id = i })</td>
+                        @Html.HiddenFor(model => pic.PictureId, new { Name = $"Pictures[{i}].PictureId" })
+                    </tr>
+                    i++;
+                }
+            </table>
+            <input type="file" id="new-image" />
+            <input type="submit" id="Save" value="Save Changes" style="margin-left: 0px" class="action-button save-button" />
+        </fieldset>
+                    }
+</div>
+
+@{Html.RenderPartial("_Modal");}

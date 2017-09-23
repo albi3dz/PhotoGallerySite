@@ -1,0 +1,37 @@
+﻿@model PhotoGallerySite.Models.AlbumViewModel
+@section scripts{
+    @Scripts.Render("~/bundles/addalbum")
+
+}
+
+<div class="home-box">
+    <h2 class="section-header"> Add Album</h2>
+    <div class="error"></div>
+    @using (Html.BeginForm("AddAlbum", "MyAlbums", null, FormMethod.Post,
+                                              new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <fieldset>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Public)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Public)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.AlbumTitle)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.AlbumTitle)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Description)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Description)
+            </div>
+            <h3> Images</h3>
+            <input type="submit" id="create" value="Create" style="margin-left: 0px" class="action-button" />
+        </fieldset>
+    }
+</div>

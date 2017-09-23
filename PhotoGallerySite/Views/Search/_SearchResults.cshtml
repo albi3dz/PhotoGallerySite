@@ -1,0 +1,20 @@
+﻿@model IEnumerable<PhotoGallerySite.Models.Album>
+
+<table class="search-table">
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Picture Count</th>
+        <th>Owner</th>
+    </tr>
+    @foreach (var album in Model)
+    {
+        <tr>
+            <td>@album.AlbumTitle</td>
+            <td>@album.Description </td>
+            <td>@album.Pictures.Count</td>
+            <td>@album.User.UserName</td>
+            <td class="clean">@Html.ActionLink("Show", "Index", "Albums", new { Id = album.AlbumId }, htmlAttributes: new { @class = "action-button", target = "_blank" })</td>
+        </tr>
+    }
+</table>

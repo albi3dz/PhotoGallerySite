@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+
+    @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+    <header>Simple Photo  Gallery Application</header>
+    <div class="left-column">
+        <h2> Main Menu</h2>
+        <ul class="main-menu">
+            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+            <li>@Html.ActionLink("My Albums", "Index", "MyAlbums")</li>
+            <li>@Html.ActionLink("Search", "Index", "Search")</li>
+            <li>@Html.ActionLink("About", "About", "Home")</li>
+             <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            <li id="last-one">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="logged-submenu">
+                        <h5 id="logged-user">Logged as: @User.Identity.Name</h5>
+                        @Html.ActionLink("Log off", "LogOff", "Account",null,new  {id="log-off" })
+                    </div>
+                }
+                else
+                {<ul class="account-submenu">
+                    <li id="loginButton">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                    <li id="registerButton">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                </ul>
+                }
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
